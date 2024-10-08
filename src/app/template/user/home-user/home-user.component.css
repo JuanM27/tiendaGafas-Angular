@@ -1,0 +1,70 @@
+/* home.component.css */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center; /* Centrar horizontalmente */
+  align-items: center; /* Centrar verticalmente */
+  height: 100vh; /* Altura total de la ventana */
+}
+
+.gafas-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    justify-content: center;
+    padding-top: 30px;
+    width: 70%;
+  }
+  
+  .gafas-card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    width: 200px;
+    text-align: center;
+    padding: 15px;
+    transition: transform 0.2s;
+  }
+  
+  .gafas-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .gafas-image {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 15px;
+  }
+  
+  .gafas-name {
+    font-size: 18px;
+    margin: 15px 0;
+    font-weight: bold;
+  }
+  
+  .gafas-price {
+    font-size: 16px;
+    color: #2c3e50;
+    margin: 10px 0;
+  }
+  
+  .buy-button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .buy-button:hover {
+    background-color: #2980b9;
+  }
+  

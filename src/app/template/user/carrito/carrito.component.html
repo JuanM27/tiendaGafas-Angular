@@ -1,0 +1,70 @@
+<div class="container-fluid mt-3">
+    <h5>Carrito</h5>
+    <hr>
+
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table stripped text-center">
+                            <thead>
+                                <tr>
+                                    <th>Gafa</th>
+                                    <th>Imagen</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Importe</th>
+                                    <th>Acción</th>
+                                </tr>
+                                
+                            </thead>
+                            <tbody>
+                                @for(item of listCarrito; track item.gafa){
+                                    <tr>
+                                        <td>{{item.gafa.descripcion}}</td>
+                                        <td><img src="{{item.gafa.imagen}}" width="50" heigh="60" alt=""></td>
+                                        <td>{{(item.gafa.precio) | number:'1.2-2'}} €</td>
+                                        <td>
+                                            <input type="number" class="form-control" [(ngModel)]="item.cantidad " min="1" (keydown)="onKeyDown($event)" (change)="actualizar(item,$index)">
+                                        </td>
+                                        <td>{{(item.gafa.precio * item.cantidad) | number:'1.2-2'}} €</td>
+                                        <td>
+                                            <button (click)="eliminarGafa($index)" type="button" class="btn btn-danger btn-sm">
+                                                <i class="fa fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                                @if(listCarrito.length == 0){
+                                    <tr>
+                                        <td colspan="5" class="text-center">No hay productos en el carrito</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <h5>Resumen de la compra</h5>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-4">
+                            <p class="mb-2">Total</p>
+                            <p class="mb-2">{{totalCarrito() | number:'1.2-2'}} €</p>
+                        </div>
+                        <button [disabled]="listCarrito.length == 0" type="button" class="btn btn-dark btn-block btn-lg">
+                            <div class="d-flex justify-content-between">
+                                <span>FINALIZAR COMPRA</span>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

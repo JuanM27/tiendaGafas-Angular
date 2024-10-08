@@ -1,0 +1,13 @@
+<app-navbar></app-navbar>
+<div class="container">
+  <div class="gafas-container">
+    <div class="gafas-card" *ngFor="let gafa of gafas">
+      <img [src]="gafa.imagen"  alt="{{ gafa.descripcion }}" class="gafas-image">
+      <h3 class="gafas-name">{{ gafa.descripcion }}</h3>
+      <p class="gafas-price">{{ gafa.precio }} €</p>
+      <button class="buy-button" (click)="agregarGafa(gafa)">Añadir al carrito <i class="fa-solid fa-cart-shopping"></i></button>
+    </div>
+  </div>
+</div>
+
+  
