@@ -1,6 +1,8 @@
 import  { Injectable } from '@angular/core';
 import { Carrito } from '../interface/carrito';
 import { Gafa } from '../interface/gafa';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AuthService } from '../guard/AuthService';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +11,9 @@ import { Gafa } from '../interface/gafa';
 export class CarritoService {
 
     private listCarrito: Carrito[] = [];
+    private apiUrl = 'http://localhost:8090/pedidos';
 
-    constructor() { }
+    constructor(private http: HttpClient, private authService: AuthService) { }
 
     getCarrito() {
 
@@ -74,6 +77,33 @@ export class CarritoService {
                 }
             }
         }
+    }
+
+    limpiarCarrito() {
+        this.listCarrito = [];
+        localStorage.removeItem('carrito');
+    }
+
+    finalizarCompra() {
+        const token = this.authService.getToken(); // Obtener el token
+
+      // Crear cabeceras con el token
+      const headers = new HttpHeaders({
+        'Authorization': `Bearer ${token}`
+      });
+
+      console.log(this.listCarrito);
+      
+        this.http.post(this.apiUrl, this.listCarrito, {headers}).subscribe(
+            (response) => {
+                
+                console.log(response);
+                this.limpiarCarrito();
+            },
+            (error) => {
+                console.log(error);
+            }
+        );
     }
 
 }

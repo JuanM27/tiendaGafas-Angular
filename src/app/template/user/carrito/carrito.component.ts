@@ -42,4 +42,8 @@ export class CarritoComponent implements OnInit{
     this.carritoService.actualizarCarrito(index, item.cantidad);
   }
 
+  finalizarCompra() {
+    this.carritoService.finalizarCompra();
+  }
+
 }

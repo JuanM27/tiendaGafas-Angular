@@ -17,6 +17,8 @@ import { CarritoService } from '../../../service/carrito.service';
 export class HomeUserComponent {
 
   gafas: Gafa[] = [];
+  terminoBusqueda: string = '';
+  gafasFiltradas: Gafa[] = [];
 
   constructor(private gafaService: GafaService, private carritoService:CarritoService) { }
 
@@ -25,6 +27,7 @@ export class HomeUserComponent {
       (data: Gafa[]) => {
         console.log("Data:",data) // Mostrar los datos en consola
         this.gafas = data; 
+        this.gafasFiltradas = this.gafas;
         console.log(localStorage.getItem('authToken')) // Asignar los datos al array gafas
       },
       (error) => {
@@ -35,6 +38,15 @@ export class HomeUserComponent {
 
   agregarGafa(gafa: Gafa) {
     this.carritoService.agregarCarrito(gafa);
+  }
+
+  recibirTerminoBusqueda(termino: string) {
+    this.terminoBusqueda = termino;
+    this.gafasFiltradas = this.filtrarGafas();
+  }
+
+  filtrarGafas() {
+    return this.gafas.filter(gafa => gafa.descripcion.toLowerCase().includes(this.terminoBusqueda.toLowerCase()));
   }
 
 }

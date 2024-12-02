@@ -1,7 +1,7 @@
-<app-navbar></app-navbar>
+<app-navbar (palabraBusqueda)="recibirTerminoBusqueda($event)"></app-navbar>
 <div class="container">
   <div class="gafas-container">
-    <div class="gafas-card" *ngFor="let gafa of gafas">
+    <div class="gafas-card" *ngFor="let gafa of gafasFiltradas">
       <img [src]="gafa.imagen"  alt="{{ gafa.descripcion }}" class="gafas-image">
       <h3 class="gafas-name">{{ gafa.descripcion }}</h3>
       <p class="gafas-price">{{ gafa.precio }} €</p>
